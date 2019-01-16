@@ -1,0 +1,106 @@
+<?php
+$v_params = $this->getParams();
+$o_roteiro = $v_params['o_roteiro'];
+$o_praticadidatica = $v_params['o_praticadidatica'];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>
+		Prática Didática | Manter Prática
+	</title>
+	<link rel="stylesheet" type="text/css" href="template/css/default.css" />
+</head>
+<body>
+ <?php 	
+include("top.php");
+include("menu.php")
+?>
+
+<div class="agile_info">
+			<div class="w3_info">
+				<h2>Roteiro</h2><br>
+				    <div class="left margin">
+						<label>Título</label><br>
+						<div class="conteudoTexto">
+							<?php echo $o_roteiro->getTituloRoteiro()?> <br>
+						</div>
+					</div>
+					
+					<div class="rightTop">
+						<label>Visibilidade</label><br>
+						<div class="conteudoTexto">
+							<?php if ($o_roteiro->getIdVisibilidade()==1)
+							         echo "Roteiro Privado";							         
+							     else
+							         echo "Roteiro Público";
+							?><br>
+						</div>
+					</div>
+				
+					<div class="left margin">
+						<br><label>Objetivos Específicos</label><br>
+						<div class="conteudoTexto">
+							<?php echo $o_roteiro->getObjEspecificoRoteiro()?> <br><br>
+						</div>
+					</div>						
+			
+					<div class="left margin">
+						<label>Conteúdo Básico</label><br>
+						<div class="conteudoTexto">
+							<?php echo $o_roteiro->getConteudoBasicoRoteiro()?>
+						</div>
+					</div>
+			</div>
+</div>	
+
+
+<div class="agile_info">
+			<div class="w3_info">
+				<h2>Prática Didática</h2>
+				<form action="#" method="post">
+							<div class="left margin">
+								<label>Motivação</label>
+								<div class="input-group">
+									<textarea rows="70" cols="100" class="estilotextarea" name='in_motivacaopratica'><?php echo $o_praticadidatica->getMotivacaoPratica()?></textarea>
+								</div>
+							</div>
+							
+								<div class="rightTop">
+									<label>Ações</label><br><br>
+									<div class="right">
+										<a href='?controle=PraticaDidatica&acao=listarPraticasDidaticas&in_idroteiro=<?php echo $o_roteiro->getIdRoteiro()?>' class='bt_red'>Cancelar</a>
+										<input type='hidden' name='controle' value='PraticaDidatica'>
+										<input type='hidden' name='acao' value='manterPraticaDidatica'>
+										<input type='hidden' name='in_roteiroid' value='<?php echo $o_roteiro->getIdRoteiro()?>'>
+										<input type='hidden' name='in_praticadidaticaid' value='<?php echo $o_praticadidatica->getIdPraticaDidatica()?>'>
+										<button type='submit' class='bt_green'>Salvar</button>
+									</div>
+								</div>
+								
+							<div class="left margin">						
+							<label>Desenvolvimento</label><br><br><br>
+								<a href='?controle=Atividade&acao=manterAtividade&in_idroteiro=<?php echo $o_roteiro->getIdRoteiro()?>&in_idpraticadidatica=<?php echo $o_praticadidatica->getIdPraticaDidatica()?>' class="i2Style_green" style="color: #FFFFFF">Nova Atividade</a> <br><br><br><br>
+							</div>
+							
+							<div class="left margin">
+								<label>Conclusão</label>
+								<div class="input-group">
+								<textarea rows="70" cols="100" class="estilotextarea" name='in_conclusaopratica'><?php echo $o_praticadidatica->getConclusaoPratica()?></textarea>
+								</div>
+							</div>
+							
+							<div class="left margin">
+								<label>Avaliação</label>
+								<div class="input-group">
+								<textarea rows="70" cols="100" class="estilotextarea" name='in_avaliacaopratica'><?php echo $o_praticadidatica->getAvaliacaoPratica()?></textarea>
+								</div>
+							</div>
+							</form>
+
+			</div>
+		<!--  <a href='?controle=PraticaDidatica&acao=manterPraticaDidatica&in_idroteiro=--><?php //echo $o_roteiro->getIdRoteiro()?><!--  ' class='bt_green'>Nova Prática</a>-->
+	</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<?php
+/*$v_params = $this->getParams();
+$o_usuario = $v_params['o_usuario'];
+$v_areasatuacao = $v_params['v_areasatuacao'];
+$v_instituicoes = $v_params['v_instituicoes'];*/
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>
+		Prática Didática - Manter Usuário
+	</title>
+	<link rel="stylesheet" type="text/css" href="template/css/default.css" />
+</head>
+<body>
+	<div align="center">
+		<form method='post'>
+		<table class='table_list' width="90%">
+			<tr>
+			<tr>
+				<th colspan='9'>
+					Usuários
+				</th>
+			</tr>
+				<th>
+					Nome
+				</th>
+				<th>
+					E-mail
+				</th>
+				<th>
+					Instituição
+				</th>
+				<th>
+					Área de Atuação
+				</th>
+				<th>
+					Senha
+				</th>
+				<th width="300px">
+					Perfil
+				</th>
+							
+				<th colspan="2">
+					Ações
+				</th>
+			</tr>
+			<tr>
+				<td>
+					<input type='text' name='st_nomeusuario' value='<?php echo $o_usuario->getNomeUsuario()?>'> 
+				</td>
+				<td>
+					<input type='text' name='st_emailusuario' value='<?php echo $o_usuario->getEmailUsuario()?>'>
+				</td>
+				<td>
+				<select name='st_idinstituicaousuario'>	
+				<?php foreach($v_instituicoes AS $o_instituicao)
+				{?>
+  					<option value='<?php echo $o_instituicao->getIdInstituicao()?>'<?php echo ($o_usuario->getIdInstituicaoUsuario() == $o_instituicao->getIdInstituicao()) ? " selected" : null;?>><?php echo $o_instituicao->getNomeInstituicao()?></option>
+				<?php }?>
+				</select>
+				<td>
+				<select name='st_idareaatuacaousuario'>	
+				<?php foreach($v_areasatuacao AS $o_areaatuacao)
+				{?>
+  					<option value='<?php echo $o_areaatuacao->getIdAreaAtuacao()?>'<?php echo ($o_usuario->getIdAreaAtuacaoUsuario() == $o_areaatuacao->getIdAreaAtuacao()) ? " selected" : null;?>><?php echo $o_areaatuacao->getDescricaoAreaAtuacao()?></option>
+				<?php }?>
+				</select>
+				</td>
+				</td>
+				<td>
+					<input type='password' name='st_senhausuario' value='<?php echo $o_usuario->getSenhaUsuario()?>'>
+				</td>
+				<td>
+					<input type="radio" name="st_perfilusuario" value="0"<?php echo ($o_usuario->getPerfilUsuario() == 0) ? " checked" : null;?>> Admin<br>
+				 	<input type="radio" name="st_perfilusuario" value="1"<?php echo ($o_usuario->getPerfilUsuario() == 1) ? " checked" : null;?>> Comum<br>
+				</td>
+				
+				<td align="center">
+					<a href='?controle=Usuario&acao=listarUsuario' class='bt_red'>Cancelar</a>
+				</td>
+				<td align="center">
+					<input type='hidden' name='controle' value='Usuario'>
+					<input type='hidden' name='acao' value='manterUsuario'>
+					<input type='hidden' name='in_idusuario' value='<?php echo $o_usuario->getIdUsuario()?>'>
+					<button type='submit' class='bt_green'>Salvar</button>
+				</td>
+			</tr>			
+		</table>
+		</form>
+	</div>
+</body>
+</html>

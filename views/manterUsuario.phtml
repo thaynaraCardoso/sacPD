@@ -1,0 +1,88 @@
+<?php
+$v_params = $this->getParams();
+$o_usuario = $v_params['o_usuario'];
+$v_areasatuacao = $v_params['v_areasatuacao'];
+$v_instituicoes = $v_params['v_instituicoes'];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>
+		Prática Didática - Manter Usuário
+	</title>
+	<link rel="stylesheet" type="text/css" href="template/css/default.css" />
+</head>
+<body>
+ <?php 
+ /* 	echo '<pre>';
+var_dump($v_params);
+echo '</pre>';	*/
+include("top.php");
+include("menu.php")
+?>
+<div class="agile_info">
+			<div class="w3_info">
+				<h2>Usuários</h2>
+				<form action="#" method="post">
+				
+							<div class="left margin">
+								<label>Nome</label>
+									<div class="input-group">
+										<input type='text' name='st_nomeusuario' value='<?php echo $o_usuario->getNomeUsuario()?>'> 
+									</div>
+							</div>
+							
+							<div class="left margin">
+								<label>E-mail</label>
+									<div class="input-group">
+										<input type='text' name='st_emailusuario' value='<?php echo $o_usuario->getEmailUsuario()?>'>
+									</div>
+							</div>
+							
+							<div class="rightTop">
+								<label>Instituição</label><br><br>
+								<select name='st_idinstituicaousuario'>	
+									<?php foreach($v_instituicoes AS $o_instituicao)
+            				        {?>
+			  							<option value='<?php echo $o_instituicao->getIdInstituicao()?>'<?php echo ($o_usuario->getIdInstituicaoUsuario() == $o_instituicao->getIdInstituicao()) ? " selected" : null;?>><?php echo $o_instituicao->getNomeInstituicao()?></option>
+									<?php }?>
+								</select>
+							</div>
+				
+							<div class="rightTop">
+								<br><br><br><label>Área de Atuação</label><br><br>
+								<select name='st_idareaatuacaousuario'>	
+								<?php foreach($v_areasatuacao AS $o_areaatuacao)
+				                {?>
+  									<option value='<?php echo $o_areaatuacao->getIdAreaAtuacao()?>'<?php echo ($o_usuario->getIdAreaAtuacaoUsuario() == $o_areaatuacao->getIdAreaAtuacao()) ? " selected" : null;?>><?php echo $o_areaatuacao->getDescricaoAreaAtuacao()?></option>
+								<?php }?>
+							</select>
+							</div>
+							
+							<div class="left margin">
+								<label>Senha</label>
+									<div class="input-group">
+										<input type='password' name='st_senhausuario' value='<?php echo $o_usuario->getSenhaUsuario()?>'>
+									</div>
+							</div>
+														
+							<div class="left margin">
+								<label>Perfil</label><br><br>
+									<input type="radio" class="black" name="st_perfilusuario" value="0"<?php echo ($o_usuario->getPerfilUsuario() == 0) ? " checked" : null;?>> Administrador<br>
+								 	<input type="radio" name="st_perfilusuario" value="1"<?php echo ($o_usuario->getPerfilUsuario() == 1) ? " checked" : null;?>> Usuario Comum
+							</div>
+				
+							<div class="left mrgin">
+								<br><label>Ações</label><br>
+									<a href='?controle=Usuario&acao=listarUsuario' class='bt_red'>Cancelar</a>
+									<input type='hidden' name='controle' value='Usuario'>
+									<input type='hidden' name='acao' value='manterUsuario'>
+									<input type='hidden' name='in_idusuario' value='<?php echo $o_usuario->getIdUsuario()?>'>
+									<button type='submit' class='bt_green'>Salvar</button>
+							</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<?php
+$v_params = $this->getParams();
+$v_usuarios = $v_params['v_usuarios'];
+$v_areasatuacao = $v_params['v_areasatuacao'];
+$v_instituicoes = $v_params['v_instituicoes'];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>
+		Pratica Didatica | Listar Usuário
+	</title>
+	<link rel="stylesheet" type="text/css" href="template/css/default.css" />
+</head>
+<body>
+ <?php 	
+//	echo '<pre>';
+//var_dump($_SESSION);
+//echo '</pre>';
+include("top.php");
+include("menu.php")
+?>
+	<div align="center">
+		<table class='table_list' width="97%">
+			<tr>
+				<th>
+					Nome
+				</th>
+				<th>
+					E-mail
+				</th>
+				<th>
+					Instituição
+				</th>
+				<th>
+					Área de Atuação
+				</th>
+				<th>
+					Perfil
+				</th>									
+				<th colspan="2">
+					Ações
+				</th>
+			</tr>
+			<?php
+			foreach($v_usuarios AS $o_usuario)
+			{
+				?>
+				<tr>
+					<td style="color: #57b846"><b>
+						<?php echo $o_usuario->getNomeUsuario()?>
+					</td>
+					
+					<td style="color: #57b846">
+						<?php echo $o_usuario->getEmailUsuario()?>
+					</td>
+					
+					<td style="color: #57b846">
+					<?php foreach($v_instituicoes AS $o_instituicao)
+						echo ($o_usuario->getIdInstituicaoUsuario() == $o_instituicao->getIdInstituicao()) ? $o_instituicao->getNomeInstituicao() :null ;?>
+					</td>
+					
+					<td style="color: #57b846">
+						<?php foreach($v_areasatuacao AS $o_areaatuacao)
+						echo ($o_usuario->getIdAreaAtuacaoUsuario() == $o_areaatuacao->getIdAreaAtuacao()) ? $o_areaatuacao->getDescricaoAreaAtuacao() :null ;?>
+					</td>
+					<td style="color: #57b846"><b>
+						<?php echo ($o_usuario->getPerfilUsuario()== 0) ? "Admin" : "Comum";?>
+					</td>
+					<td align="center">
+						<a href='?controle=Usuario&acao=manterUsuario&in_idusuario=<?php echo $o_usuario->getIdUsuario()?>' class='bt_blue'>Editar</a>
+					</td>
+					<td align="center">
+						<a href='?controle=Usuario&acao=apagarUsuario&in_idusuario=<?php echo $o_usuario->getIdUsuario()?>' class='bt_red'>Apagar</a>
+					</td>
+				</tr>
+				<?php
+			}
+			?>
+		</table>
+		<br />
+		<a href='?controle=Usuario&acao=manterUsuario' class='bt_green'>Novo Usuário</a>
+	</div>
+</body>
+</html>

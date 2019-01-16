@@ -1,0 +1,5 @@
+﻿Setar no arquivo php.ini
+upload_max_filesize = 16M
+
+Setar no MySql (já incluso no script de criação do BD)
+SET GLOBAL max_allowed_packet=16777216;

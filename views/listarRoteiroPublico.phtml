@@ -1,0 +1,58 @@
+<?php
+$v_params = $this->getParams();
+$v_roteiros = $v_params['v_roteiros'];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>
+		Pratica Didatica | Listar Roteiro
+	</title>
+	<link rel="stylesheet" type="text/css" href="template/css/default.css" />
+</head>
+<body>
+ <?php 	
+	/*echo '<pre>';
+var_dump($_REQUEST);
+echo '</pre>';*/
+include("top.php");
+include("menu.php")
+?>
+	<div align="center">
+		<table class='table_list' width="100%">
+			<tr>
+				<th>
+					Título do Roteiro
+				</th>
+				<th>
+					Visibilidade
+				</th>
+				<th colspan="1">
+					Ações
+				</th>
+			</tr>
+			<?php
+			foreach($v_roteiros AS $o_roteiro)
+			{
+				?>
+				<tr>
+					<td style="color: #57b846"><b>
+						<?php echo $o_roteiro->getTituloRoteiro()?>
+					</td></b>
+					<td style="color: #57b846">
+						<?php echo ($o_roteiro->getIdVisibilidade()== 0) ? "Roteiro Público" : "Roteiro Privado";?>
+					</td>
+					<td align="center"  style="color: #57b846">
+						<a href='?controle=PraticaDidatica&acao=listarPraticasDidaticasPublicas&in_idroteiro=<?php echo $o_roteiro->getIdRoteiro()?>' class='bt_green' >Práticas Didáticas</a>
+					</td>
+				</tr>
+				<?php
+			}
+			?>
+		</table>
+		<br/>
+		
+	</div>
+</body>
+</html>

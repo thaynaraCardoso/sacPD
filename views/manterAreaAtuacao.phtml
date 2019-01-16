@@ -1,0 +1,42 @@
+<?php
+$v_params = $this->getParams();
+$o_areaatuacao = $v_params['o_areaatuacao'];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>
+		Prática Didática - Manter Área de Atuação
+	</title>
+	<link rel="stylesheet" type="text/css" href="template/css/default.css" />
+</head>
+<body>
+ <?php 	
+include("top.php");
+include("menu.php")
+?>
+
+<div class="agile_info">
+			<div class="w3_info">
+				<h2>Área de Atuação</h2>
+				<form method="post">
+				
+				<div class="left margin">
+					<label>Descrição</label>
+						<div class="input-group">
+							<input type='text' name='st_descricaoareaatuacao' size='80' value='<?php echo $o_areaatuacao->getDescricaoAreaAtuacao()?>'>
+						</div>
+						
+				<div class="left margin">
+				   <label>Ações</label><br><br>
+					<a href='?controle=AreaAtuacao&acao=listarAreaAtuacao' class='bt_red'>Cancelar</a><br>
+				
+					<input type='hidden' name='controle' value='AreaAtuacao'>
+					<input type='hidden' name='acao' value='manterAreaAtuacao'>
+					<input type='hidden' name='in_idareaatuacao' value='<?php echo $o_areaatuacao->getIdAreaAtuacao()?>'>
+					<button type='submit' class='bt_green'>Salvar</button>
+			</form>
+	</div>
+</body>
+</html>

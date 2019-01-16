@@ -1,0 +1,159 @@
+<?php
+$v_params = $this->getParams();
+$o_roteiro = $v_params['o_roteiro'];
+$o_praticadidatica = $v_params['o_praticadidatica'];
+$o_atividade = $v_params['o_atividade'];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>
+		Prática Didática | Manter Atividade
+	</title>
+	<link rel="stylesheet" type="text/css" href="template/css/default.css" />
+</head>
+<body>
+ 
+ <?php 	
+include("top.php");
+include("menu.php")
+?>
+
+<div class="agile_info">
+			<div class="w3_info">
+				<h2>Roteiro</h2><br>
+				
+				    <div class="left margin">
+						<label>Título do Roteiro</label><br>
+						<div class="conteudoTexto">
+							<?php echo $o_roteiro->getTituloRoteiro()?> <br>
+						</div>
+					</div>
+					
+					<div class="rightTop">
+						<label>Visibilidade</label><br>
+						<div class="conteudoTexto">
+							<?php if ($o_roteiro->getIdVisibilidade()==1)
+							         echo "Roteiro Privado";							         
+							     else
+							         echo "Roteiro Público";
+							?>
+							<br>
+						</div>
+					</div>
+				
+					<div class="left margin">
+						<br><label>Objetivos Específicos</label><br>
+						<div class="conteudoTexto">
+							<?php echo $o_roteiro->getObjEspecificoRoteiro()?> <br><br>
+						</div>
+					</div>						
+			
+					<div class="left margin">
+						<label>Conteúdo Básico</label><br>
+						<div class="conteudoTexto">
+							<?php echo $o_roteiro->getConteudoBasicoRoteiro()?>
+						</div>
+					</div>
+			</div>
+</div>	
+
+<div class="agile_info">
+			<div class="w3_info">
+				<h2>Prática Didática</h2><br>
+				
+			    	<div class="left margin">
+						<label>Motivação</label><br>
+						<div class="conteudoTexto">
+							<?php echo $o_praticadidatica->getMotivacaoPratica()?> <br>
+						</div>
+					</div>
+											
+			    	<div class="left margin">
+							<br><label>Desenvolvimento</label><br><br>
+									<form  method="post" enctype="multipart/form-data">
+							
+										<div class="left margin">
+											<label>Descrição da Atividade</label>
+											<div class="input-group">
+												<textarea rows="70" cols="100" class="estilotextarea" name='in_descricaoatividade'><?php echo $o_atividade->getDescricaoAtividade()?></textarea>
+											</div>
+										</div>
+							
+										<div class="rightTop">
+											<label>Tipo de Atividade</label><br><br>						
+												<input type="radio" name="in_tipoatividade" value="0"<?php echo ($o_atividade->getTipoAtividade() == 0) ? " checked" : null;?>> Atividade de Classe<br>
+							 					<input type="radio" name="in_tipoatividade" value="1"<?php echo ($o_atividade->getTipoAtividade() == 1) ? " checked" : null;?>> Atividade Extraclasse<br>
+							 					<input type="radio" name="in_tipoatividade" value="2"<?php echo ($o_atividade->getTipoAtividade() == 2) ? " checked" : null;?>> Atividade Complementar<br><br>
+										</div>
+
+								
+										<div class="left margin">
+											<label>Material de apoio</label><br><br>
+												<input type='file'  accept='video/*,image/*, .doc, .xls, .docx, .xlsx, application/pdf' name='in_materialapoioatividade' id='in_materialapoioatividade' value='<?php echo $o_atividade->getMaterialApoioAtividade()?>'>
+										</div>
+										
+										<div class="rightTop">
+											<label>Ações</label><br><br>
+												<div class="right">
+													<a href='?controle=PraticaDidatica&acao=listarPraticasDidaticas&in_idroteiro=<?php echo $o_roteiro->getIdRoteiro()?>' class='bt_red'>Cancelar</a>
+													<input type='hidden' name='controle' value='Atividade'>
+													<input type='hidden' name='acao' value='manterAtividade'>
+													<input type='hidden' name='in_roteiroid' value='<?php echo $o_roteiro->getIdRoteiro();?>'>
+													<input type='hidden' name='in_praticadidaticaid' value='<?php echo $o_praticadidatica->getIdPraticaDidatica()?>'>
+													<input type='hidden' name='in_atividadeid' value='<?php echo $o_atividade->getIdAtividade()?>'>
+													<button type='submit' class='bt_green'>Salvar</button>
+												</div>
+										</div>
+									</form>
+								</div>
+						</div>
+	
+					</div>	
+				
+			<div class="agile_info">
+				<div class="w3_info">
+					<div class="left margin">
+						<label>Avaliação</label><br>
+						<div class="conteudoTexto">
+							<?php echo $o_praticadidatica->getAvaliacaoPratica()?> <br><br>
+						</div>
+					</div>						
+			
+					<div class="left margin">
+						<label>Conclusão</label><br>
+						<div class="conteudoTexto">
+							<?php echo $o_praticadidatica->getConclusaoPratica()?>
+						</div>
+					</div>
+				</div>
+			</div>	
+
+	
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script>
+        (function() {
+            'use strict'
+
+            if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+                var msViewportStyle = document.createElement('style')
+                msViewportStyle.appendChild(
+                    document.createTextNode(
+                        '@-ms-viewport{width:auto!important}'
+                    )
+                )
+                document.head.appendChild(msViewportStyle)
+            }
+
+        }())
+
+    </script>	
+</body>
+</html>

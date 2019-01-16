@@ -1,0 +1,57 @@
+<?php
+
+$v_params = $this->getParams();
+$v_instituicoes = $v_params['v_instituicoes'];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>
+		Pratica Didatica | Listar Area de Atuação
+	</title>
+	<link rel="stylesheet" type="text/css" href="template/css/default.css" />
+</head>
+<body>
+ <?php 	
+	/*echo '<pre>';
+var_dump($_REQUEST);
+echo '</pre>';*/
+include("top.php");
+include("menu.php")
+?>
+	<div align="center">
+		<table class='table_list' width="40%">
+			<tr>
+				<th>
+					Nome da Instituição
+				</th>
+				<th colspan="2">
+					Ações
+				</th>
+			</tr>
+			<?php
+			
+			foreach($v_instituicoes AS $o_instituicao)
+			{ 
+				?>
+				<tr>
+					<td>
+						<div class='green'><?php echo $o_instituicao->getNomeInstituicao()?></div>
+					</td>
+					<td align="center">
+						<a href='?controle=Instituicao&acao=manterInstituicao&in_idinstituicao=<?php echo $o_instituicao->getIdInstituicao()?>' class='bt_blue'>Editar</a>
+					</td>
+					<td align="center">
+						<a href='?controle=Instituicao&acao=apagarInstituicao&in_idinstituicao=<?php echo $o_instituicao->getIdInstituicao()?>' class='bt_red'>Apagar</a>
+					</td>
+				</tr>
+				<?php
+			}
+			?>
+		</table>
+		<br />
+			<a href="?controle=Instituicao&acao=manterInstituicao" class="bt_green">Nova Instituição</a>
+	</div>
+</body>
+</html>

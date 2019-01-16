@@ -1,0 +1,44 @@
+<?php
+$v_params = $this->getParams();
+$o_instituicao = $v_params['o_instituicao'];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>
+		Prática Didática - Manter Instituição
+	</title>
+	<link rel="stylesheet" type="text/css" href="template/css/default.css" />
+</head>
+<body>
+ <?php 	
+include("top.php");
+include("menu.php")
+?>
+
+<div class="agile_info">
+			<div class="w3_info">
+				<h2>Instituição</h2>
+				<form method="post">
+				
+				<div class="left margin">
+					<label>Nome da Instituição</label>
+						<div class="input-group">
+							<input type='text' name='st_nomeinstituicao' size='80' value='<?php echo $o_instituicao->getNomeInstituicao()?>'>
+						</div>
+				</div>
+				
+				<div class="left margin">
+				   <label>Ações</label><br><br>
+					<a href='?controle=Instituicao&acao=listarInstituicao' class='bt_red'>Cancelar</a><br>
+				
+					<input type='hidden' name='controle' value='Instituicao'>
+					<input type='hidden' name='acao' value='manterInstituicao'>
+					<input type='hidden' name='in_idinstituicao' value='<?php echo $o_instituicao->getIdInstituicao()?>'>
+					<button type='submit' class='bt_green'>Salvar</button>
+
+		</form>
+	</div>
+</body>
+</html>
